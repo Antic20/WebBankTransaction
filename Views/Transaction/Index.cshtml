@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebBankTransaction.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<h1>Passbook</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BeneficiaryName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Data)
+			</th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            
+            <th>
+                <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
+                    <i class="bi bi-plus-square-fill"></i>Create New
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeneficiaryName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Data)
+				</td>
+				<td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+         
+            <td>
+                <a asp-action="AddOrEdit" asp-route-id="@item.TransactionId" class="btn btn-warning">
+                        Update   
+                    </a>
+
+                    <form asp-action="Delete" asp-route-id="@item.TransactionId"> 
+                        <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure to delete this record?' )">
+                            Delete
+                        </button>
+                    </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
